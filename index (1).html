@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Synaprix — AI for Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0a0a;
+  --ink2:#3a3a3a;
+  --ink3:#7a7a7a;
+  --paper:#fafaf8;
+  --surface:#f3f3f0;
+  --line:#e4e4df;
+  --accent:#1a1aff;
+  --accent-light:#ebebff;
+  --white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Geist',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 5%;
+  background:rgba(250,250,248,0.9);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+}
+.logo{font-family:'Geist',sans-serif;font-weight:600;font-size:1.1rem;color:var(--ink);text-decoration:none;letter-spacing:-0.5px}
+.logo-dot{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--ink3);text-decoration:none;font-size:0.88rem;font-weight:400;transition:color 0.2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:0.5rem 1.25rem;border-radius:100px;font-size:0.85rem!important;font-weight:500!important;transition:opacity 0.2s!important}
+.nav-cta:hover{opacity:0.8!important}
+
+#hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  padding:8rem 5% 5rem;gap:4rem;
+  border-bottom:1px solid var(--line);
+}
+.hero-left{max-width:560px}
+.hero-eyebrow{display:inline-block;font-size:0.75rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(3.2rem,5.5vw,5rem);font-weight:400;line-height:1.05;letter-spacing:-1.5px;color:var(--ink);margin-bottom:1.75rem}
+h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:1.05rem;color:var(--ink2);max-width:420px;line-height:1.7;margin-bottom:2.5rem;font-weight:300}
+.hero-actions{display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center}
+.btn-dark{background:var(--ink);color:var(--white);font-family:'Geist',sans-serif;font-weight:500;font-size:0.9rem;padding:0.75rem 1.75rem;border-radius:100px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity 0.2s}
+.btn-dark:hover{opacity:0.8}
+.btn-outline{background:transparent;color:var(--ink);font-family:'Geist',sans-serif;font-weight:400;font-size:0.9rem;padding:0.75rem 1.75rem;border-radius:100px;border:1px solid var(--line);cursor:pointer;text-decoration:none;display:inline-block;transition:border-color 0.2s}
+.btn-outline:hover{border-color:var(--ink)}
+
+.hero-right{display:flex;flex-direction:column;gap:1px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--line)}
+.stat-block{background:var(--paper);padding:2rem 2.25rem;display:flex;flex-direction:column;gap:0.3rem}
+.stat-n{font-family:'Instrument Serif',serif;font-size:3.5rem;line-height:1;letter-spacing:-2px;color:var(--ink)}
+.stat-n sup{font-size:1.5rem;letter-spacing:0}
+.stat-desc{font-size:0.85rem;color:var(--ink3);font-weight:300}
+
+section{padding:7rem 5%;border-bottom:1px solid var(--line)}
+.container{max-width:1140px;margin:0 auto}
+.section-header{margin-bottom:4rem}
+.tag{display:inline-block;font-size:0.72rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:1.25rem}
+h2{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,4vw,3.8rem);font-weight:400;line-height:1.08;letter-spacing:-1.5px;color:var(--ink)}
+h2 em{font-style:italic;color:var(--accent)}
+
+#strip{padding:0;border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;background:var(--ink)}
+.marquee-track{display:inline-flex;animation:marquee 22s linear infinite;padding:1rem 0}
+.marquee-item{font-size:0.78rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);padding:0 2.5rem}
+.marquee-dot{color:var(--accent);margin:0 0.5rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+#services{background:var(--paper)}
+.services-list{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:4rem}
+.service-row{background:var(--paper);display:grid;grid-template-columns:2fr 1fr 1.5fr;align-items:center;padding:2rem 2.5rem;gap:2rem;transition:background 0.2s}
+.service-row:hover{background:var(--surface)}
+.srv-name{font-family:'Geist',sans-serif;font-weight:500;font-size:1.05rem;color:var(--ink)}
+.srv-badge{font-size:0.7rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;background:var(--accent-light);color:var(--accent);padding:0.3rem 0.9rem;border-radius:100px;justify-self:start;white-space:nowrap}
+.srv-desc{font-size:0.88rem;color:var(--ink3);line-height:1.6;font-weight:300}
+
+#process{background:var(--surface)}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:4rem}
+.step-card{background:var(--paper);padding:2.5rem 2rem}
+.step-num{font-family:'Instrument Serif',serif;font-size:4.5rem;line-height:1;letter-spacing:-2px;color:var(--line);margin-bottom:1.5rem;user-select:none}
+.step-card h3{font-size:0.95rem;font-weight:500;color:var(--ink);margin-bottom:0.5rem}
+.step-card p{font-size:0.85rem;color:var(--ink3);line-height:1.65;font-weight:300}
+
+#why{background:var(--paper)}
+.why-split{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.why-left h2{margin-bottom:1.5rem}
+.why-left p{font-size:1rem;color:var(--ink2);line-height:1.75;font-weight:300;max-width:400px}
+.reasons{display:flex;flex-direction:column;margin-top:2rem}
+.reason{padding:1.5rem 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start}
+.reason:last-child{border-bottom:1px solid var(--line)}
+.reason-icon{width:36px;height:36px;border-radius:10px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px;flex-shrink:0}
+.reason h4{font-size:0.92rem;font-weight:500;color:var(--ink);margin-bottom:0.25rem}
+.reason p{font-size:0.85rem;color:var(--ink3);font-weight:300;line-height:1.6}
+
+#projects{background:var(--surface)}
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:4rem}
+.proj-card{background:var(--paper);padding:2.5rem;transition:background 0.2s}
+.proj-card:hover{background:var(--white)}
+.proj-industry{font-size:0.72rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:1.25rem}
+.proj-card h3{font-family:'Instrument Serif',serif;font-size:1.5rem;font-weight:400;color:var(--ink);margin-bottom:0.75rem;line-height:1.2;letter-spacing:-0.5px}
+.proj-card p{font-size:0.88rem;color:var(--ink3);line-height:1.65;font-weight:300}
+
+#contact{background:var(--ink);border-bottom:none}
+.cta-inner{max-width:720px;margin:0 auto;text-align:center}
+.cta-inner h2{color:var(--white);margin-bottom:1.25rem}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,0.4);margin-bottom:2.5rem;font-weight:300;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.7}
+.cta-btns{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.btn-white{background:var(--white);color:var(--ink);font-family:'Geist',sans-serif;font-weight:500;font-size:0.9rem;padding:0.75rem 1.75rem;border-radius:100px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity 0.2s}
+.btn-white:hover{opacity:0.85}
+.btn-outline-white{background:transparent;color:rgba(255,255,255,0.6);font-family:'Geist',sans-serif;font-weight:400;font-size:0.9rem;padding:0.75rem 1.75rem;border-radius:100px;border:1px solid rgba(255,255,255,0.15);cursor:pointer;text-decoration:none;display:inline-block;transition:border-color 0.2s,color 0.2s}
+.btn-outline-white:hover{border-color:rgba(255,255,255,0.4);color:var(--white)}
+.contact-row{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.08)}
+.contact-item{display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.3);font-size:0.85rem;text-decoration:none;transition:color 0.2s}
+.contact-item:hover{color:rgba(255,255,255,0.65)}
+
+footer{background:var(--ink);padding:1.5rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,0.07)}
+.footer-logo{font-family:'Geist',sans-serif;font-weight:600;font-size:1rem;color:var(--white);text-decoration:none}
+.footer-right{display:flex;gap:2rem;align-items:center}
+.footer-right a{color:rgba(255,255,255,0.3);text-decoration:none;font-size:0.82rem;transition:color 0.2s}
+.footer-right a:hover{color:rgba(255,255,255,0.65)}
+.footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.2)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding-top:7rem;gap:2rem}
+  .hero-right{display:none}
+  .service-row{grid-template-columns:1fr;gap:0.6rem;padding:1.5rem}
+  .srv-badge{justify-self:start}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .why-split{grid-template-columns:1fr;gap:3rem}
+  .projects-grid{grid-template-columns:1fr}
+  .proj-card:nth-child(1){border-radius:19px 19px 0 0}
+  .proj-card:nth-child(2){border-radius:0}
+  .proj-card:nth-child(3){border-radius:0}
+  .proj-card:nth-child(4){border-radius:0 0 19px 19px}
+}
+@media(max-width:600px){
+  nav{padding:1rem 5%}
+  .nav-links li:not(:last-child){display:none}
+  section{padding:4.5rem 5%}
+  #hero{padding:6rem 5% 3.5rem;min-height:auto}
+  h1{font-size:2.6rem;letter-spacing:-1px}
+  h2{font-size:2.2rem;letter-spacing:-1px}
+  .hero-sub{font-size:0.95rem}
+  .hero-actions{flex-direction:column;align-items:stretch;text-align:center}
+  .btn-dark,.btn-outline{text-align:center;padding:0.85rem 1.5rem}
+  .services-list{border-radius:14px}
+  .service-row{padding:1.25rem}
+  .srv-name{font-size:0.95rem}
+  .process-grid{grid-template-columns:1fr;border-radius:14px}
+  .step-card{padding:1.75rem 1.5rem}
+  .step-num{font-size:3rem;margin-bottom:1rem}
+  .why-split{gap:2rem}
+  .reasons{margin-top:0}
+  .projects-grid{border-radius:14px}
+  .proj-card{padding:1.75rem 1.5rem}
+  .proj-card h3{font-size:1.3rem}
+  .cta-inner h2{font-size:2rem}
+  .cta-btns{flex-direction:column;align-items:stretch}
+  .btn-white,.btn-outline-white{text-align:center;padding:0.85rem 1.5rem}
+  footer{flex-direction:column;align-items:center;text-align:center;gap:0.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">Synap<span class="logo-dot">.</span>rix</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="https://wa.link/fs83cb" target="_blank" class="nav-cta">Let's Talk</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">AI Solutions Studio · Malaysia</span>
+    <h1>Automate more.<br/><em>Grow faster.</em></h1>
+    <p class="hero-sub">We build chatbots, automations, and AI systems that do the heavy lifting — so your team can focus on what actually matters.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-dark">Start a project</a>
+      <a href="#services" class="btn-outline">See our work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-block">
+      <div class="stat-n">24<sup>h</sup></div>
+      <div class="stat-desc">Response &amp; scoping time</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-n">6<sup>+</sup></div>
+      <div class="stat-desc">Service types, one point of contact</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-n">0</div>
+      <div class="stat-desc">Generic templates. Every build is custom.</div>
+    </div>
+  </div>
+</section>
+
+<div id="strip">
+  <div class="marquee-track">
+    <span class="marquee-item">AI Chatbots<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">Lead Automation<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">Booking Flows<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">WhatsApp Bots<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">CRM Integration<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">Workflow Automation<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">E-commerce Bots<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">Voice Agents<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">AI Chatbots<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">Lead Automation<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">Booking Flows<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">WhatsApp Bots<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">CRM Integration<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">Workflow Automation<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">E-commerce Bots<span class="marquee-dot">·</span></span>
+    <span class="marquee-item">Voice Agents<span class="marquee-dot">·</span></span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="tag">What we build</p>
+      <h2>The right tool<br/>for your problem</h2>
+    </div>
+    <div class="services-list reveal">
+      <div class="service-row">
+        <div class="srv-name">AI Chatbots &amp; Voice Agents</div>
+        <div class="srv-badge">Most popular</div>
+        <div class="srv-desc">On your website, WhatsApp, or Messenger — capturing leads and booking appointments around the clock.</div>
+      </div>
+      <div class="service-row">
+        <div class="srv-name">Workflow Automation</div>
+        <div class="srv-badge">High impact</div>
+        <div class="srv-desc">Kill the repetitive stuff. Lead routing, reminders, follow-ups — handled automatically.</div>
+      </div>
+      <div class="service-row">
+        <div class="srv-name">CRM &amp; Booking Integration</div>
+        <div class="srv-badge">Fast setup</div>
+        <div class="srv-desc">Connect AI to Calendly, Google Calendar, or your clinic system. Customers self-serve, you stay focused.</div>
+      </div>
+      <div class="service-row">
+        <div class="srv-name">E-commerce Support Bots</div>
+        <div class="srv-badge">24/7 support</div>
+        <div class="srv-desc">Order tracking, product guides, FAQs — answered instantly, no extra team required.</div>
+      </div>
+      <div class="service-row">
+        <div class="srv-name">Social Media Automation</div>
+        <div class="srv-badge">Always on</div>
+        <div class="srv-desc">Schedule posts, auto-reply to DMs, track engagement — your brand stays active without the grind.</div>
+      </div>
+      <div class="service-row">
+        <div class="srv-name">Custom AI Strategy</div>
+        <div class="srv-badge">Start here</div>
+        <div class="srv-desc">Not sure where to begin? We'll map the highest-leverage automations for your business — free.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="tag">How we work</p>
+      <h2>Four steps.<br/><em>No surprises.</em></h2>
+    </div>
+    <div class="process-grid reveal">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Discovery</h3>
+        <p>You share what you want to solve. We listen, ask the right questions, and figure out the best approach.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Custom plan</h3>
+        <p>A clear scope, timeline, and cost — in writing before a single line is built. No moving goalposts.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Build</h3>
+        <p>We build and you get regular updates. You're never left wondering what's happening.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3>Launch &amp; support</h3>
+        <p>Live when it meets your goals. We stick around to keep it sharp as your business grows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="why-split">
+      <div class="why-left reveal">
+        <p class="tag">Why Synaprix</p>
+        <h2>We care about outcomes, <em>not output.</em></h2>
+        <p>A lot of agencies deliver a bot and disappear. We measure success by what your system actually achieves — leads converted, time saved, revenue generated.</p>
+      </div>
+      <div class="reasons reveal">
+        <div class="reason">
+          <div class="reason-icon">🎯</div>
+          <div>
+            <h4>Results, not just deliverables</h4>
+            <p>We're not done until the system works the way your business needs it to.</p>
+          </div>
+        </div>
+        <div class="reason">
+          <div class="reason-icon">🏗</div>
+          <div>
+            <h4>Built for your industry</h4>
+            <p>Real estate, clinics, e-commerce, hiring — we know the nuances. No generic solutions.</p>
+          </div>
+        </div>
+        <div class="reason">
+          <div class="reason-icon">⚡</div>
+          <div>
+            <h4>No-code speed, pro-level quality</h4>
+            <p>Faster to build, easier for your team to manage. No developer needed on your end.</p>
+          </div>
+        </div>
+        <div class="reason">
+          <div class="reason-icon">🤝</div>
+          <div>
+            <h4>Direct. No middlemen.</h4>
+            <p>You work with Thievindrran directly — start to finish. No handoffs, no account managers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="tag">Work</p>
+      <h2>What we've built</h2>
+    </div>
+    <div class="projects-grid reveal">
+      <div class="proj-card">
+        <div class="proj-industry">Healthcare · Chatbot</div>
+        <h3>Chiropractic Clinic Lead &amp; Booking Bot</h3>
+        <p>Automated lead capture and appointment scheduling on Facebook Messenger. Patients self-qualify and book — no staff in the loop.</p>
+      </div>
+      <div class="proj-card">
+        <div class="proj-industry">Real Estate · Chatbot</div>
+        <h3>Property Agency Lead Qualifier</h3>
+        <p>A chatbot that qualifies buyer intent and auto-shares relevant listings on WhatsApp and web — 24/7, zero manual effort.</p>
+      </div>
+      <div class="proj-card">
+        <div class="proj-industry">Marketing · Automation</div>
+        <h3>Social Media on Autopilot</h3>
+        <p>Content scheduling, auto-replies, and engagement tracking — brand stays present without the daily manual work.</p>
+      </div>
+      <div class="proj-card">
+        <div class="proj-industry">HR · Workflow</div>
+        <h3>End-to-End Hiring Automation</h3>
+        <p>From job posting to interview scheduling in ClickUp and Google Sheets — automated task tracking and candidate updates throughout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <p class="tag" style="color:rgba(255,255,255,0.25)">Get started</p>
+      <h2 style="color:var(--white)">Let's build something<br/><em style="color:rgba(255,255,255,0.3)">that actually works.</em></h2>
+      <p class="cta-sub">Tell us what you want to automate. We'll respond within 24 hours with a clear plan — no commitment required.</p>
+      <div class="cta-btns">
+        <a href="https://wa.link/fs83cb" target="_blank" class="btn-white">Get in touch</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="#">Synaprix</a>
+  <span class="footer-copy">© 2026 Synaprix. All rights reserved.</span>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.service-row,.step-card,.proj-card,.reason').forEach((el,i)=>{el.style.transitionDelay=`${i*0.07}s`});
+</script>
+</body>
+</html>
