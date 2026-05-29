@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free AI Automation Toolkit | Synaprix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #0A1628;
+      --teal: #0D9488;
+      --teal-dark: #134E4A;
+      --white: #FFFFFF;
+      --bg-light: #F9FAFB;
+      --bg-pale: #F3F4F6;
+      --gray-dark: #374151;
+      --gray: #6B7280;
+      --gray-light: #D1D5DB;
+      --border: #E5E7EB;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+      color: var(--gray-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--teal);
+    }
+
+    .header-social {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .header-social a {
+      font-size: 13px;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .header-social a:hover {
+      color: var(--teal);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+      letter-spacing: -0.6px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--gray);
+      margin-bottom: 16px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .description {
+      font-size: 16px;
+      color: var(--gray);
+      margin-bottom: 48px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .feature {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .feature:hover {
+      border-color: var(--teal);
+      box-shadow: 0 4px 16px rgba(13, 148, 136, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      border-radius: 16px;
+      padding: 48px 32px;
+      max-width: 700px;
+      margin: 0 auto 60px;
+      color: var(--white);
+    }
+
+    .cta-section h2 {
+      font-size: 28px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      margin-bottom: 32px;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--teal);
+      padding: 14px 36px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+      min-width: 240px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .secondary-cta {
+      margin-top: 24px;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--white);
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+      margin-left: 12px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 13px;
+      border-top: 1px solid rgba(13, 148, 136, 0.2);
+      margin-top: auto;
+    }
+
+    footer p {
+      margin-bottom: 8px;
+      opacity: 0.8;
+    }
+
+    footer a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: var(--gray);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      color: var(--navy);
+    }
+
+    .modal-content h2 {
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .modal-desc {
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn-submit,
+    .btn-cancel {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex: 1;
+    }
+
+    .btn-submit {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .btn-submit:hover {
+      background: var(--teal-dark);
+    }
+
+    .btn-cancel {
+      background: var(--bg-pale);
+      color: var(--gray-dark);
+    }
+
+    .btn-cancel:hover {
+      background: var(--border);
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--navy);
+      color: var(--white);
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 2000;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      .cta-section {
+        padding: 32px 24px;
+      }
+
+      .cta-section h2 {
+        font-size: 24px;
+      }
+
+      .btn-primary {
+        min-width: 100%;
+      }
+
+      .btn-secondary {
+        display: block;
+        margin: 12px 0 0 0;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-content {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="logo">Synaprix<span>.</span></div>
+    <div class="header-social">
+      <a href="https://instagram.com/synaprix" target="_blank">Instagram</a>
+      <a href="https://twitter.com/synaprix" target="_blank">Twitter</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1>Free AI Automation Toolkit</h1>
+  <p class="subtitle">Everything you need to automate sales, support, and operations</p>
+  <p class="description">Get instant access to 5 powerful resources: prompt templates, setup guides, ROI calculator, case studies, and AI readiness checklists. Download directly from our Google Drive folder—no sign-up required.</p>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">📋</div>
+      <div class="feature-title">Prompt Templates</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⚙️</div>
+      <div class="feature-title">Setup Guides</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">ROI Calculator</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📈</div>
+      <div class="feature-title">Case Studies</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">✓</div>
+      <div class="feature-title">Checklists</div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Access All Files Now</h2>
+    <p>Click the button below to open our Google Drive folder and download everything you need. All files are ready to use immediately.</p>
+    <a href="https://drive.google.com/drive/folders/1rzznWERj1Wpo20LMOmjyVrx5UpdHxPhy?usp=sharing" target="_blank" class="btn-primary">📥 Open Google Drive Folder</a>
+    <div class="secondary-cta">
+      <button class="btn-secondary" onclick="openModal('email')">Send Files to Email</button>
+    </div>
+  </div>
+
+</main>
+
+<!-- EMAIL CAPTURE MODAL -->
+<div class="modal" id="emailModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('email')">×</button>
+    <h2>Get Files Emailed to You</h2>
+    <p class="modal-desc">We'll send you a direct download link to all files. No spam, just useful AI resources.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Email</label>
+        <input type="email" required placeholder="you@business.com">
+      </div>
+      <div class="form-group">
+        <label>Your Business (Optional)</label>
+        <input type="text" placeholder="e.g. Dental Clinic, SaaS Company">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" onclick="closeModal('email')">Cancel</button>
+        <button type="submit" class="btn-submit">Send Download Link</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <p>Built by <a href="https://synaprix.com" target="_blank">Synaprix</a> — AI agents for sales, support, and operations.</p>
+  <p>Follow <a href="https://instagram.com/synaprix" target="_blank">@synaprix</a> on Instagram for weekly AI automation posts.</p>
+</footer>
+
+<script>
+  function openModal(type) {
+    document.getElementById(type + 'Modal').classList.add('active');
+  }
+
+  function closeModal(type) {
+    document.getElementById(type + 'Modal').classList.remove('active');
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const email = form.querySelector('input[type="email"]').value;
+    const business = form.querySelector('input[type="text"]').value || 'Not specified';
+
+    console.log('Form submitted:', {
+      email: email,
+      business: business,
+      timestamp: new Date().toISOString()
+    });
+
+    closeModal('email');
+    showToast('✓ Check your email for the download link');
+  }
+
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.animation = 'slideIn 0.3s ease reverse';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal('email');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
