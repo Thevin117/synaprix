@@ -144,6 +144,19 @@ footer{background:var(--ink);padding:1.5rem 5%;display:flex;align-items:center;j
   .proj-card:nth-child(3){border-radius:0}
   .proj-card:nth-child(4){border-radius:0 0 19px 19px}
 }
+/* Resources modal */
+.res-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,10,0.65);backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center}
+.res-overlay.active{display:flex}
+.res-modal{background:var(--white);border-radius:20px;width:min(660px,95vw);max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,0.18)}
+.res-modal-head{padding:1.25rem 1.75rem;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.res-modal-title{font-family:'Instrument Serif',serif;font-size:1.35rem;font-weight:400;color:var(--ink);letter-spacing:-0.4px}
+.res-modal-sub{font-size:0.8rem;color:var(--ink3);margin-top:0.15rem;font-weight:300}
+.res-close{background:none;border:none;cursor:pointer;color:var(--ink3);font-size:1.5rem;line-height:1;padding:0.2rem 0.4rem;border-radius:6px;transition:color 0.2s,background 0.2s}
+.res-close:hover{color:var(--ink);background:var(--surface)}
+.res-modal-body{flex:1;overflow-y:auto}
+.res-modal-body iframe{width:100%;height:540px;border:none;display:block}
+.res-loading{padding:3rem;text-align:center;color:var(--ink3);font-size:0.88rem;font-weight:300}
+
 @media(max-width:600px){
   nav{padding:1rem 5%}
   .nav-links li:not(:last-child){display:none}
@@ -180,7 +193,7 @@ footer{background:var(--ink);padding:1.5rem 5%;display:flex;align-items:center;j
     <li><a href="#services">Services</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#projects">Work</a></li>
-    <li><a href="resources.html">Resources</a></li>
+    <li><a href="#" onclick="openResources();return false;">Resources</a></li>
     <li><a href="https://wa.link/fs83cb" target="_blank" class="nav-cta">Let's Talk</a></li>
   </ul>
 </nav>
@@ -396,10 +409,60 @@ footer{background:var(--ink);padding:1.5rem 5%;display:flex;align-items:center;j
   <span class="footer-copy">© 2026 Synaprix. All rights reserved.</span>
 </footer>
 
+<!-- Resources modal -->
+<div class="res-overlay" id="resOverlay">
+  <div class="res-modal">
+    <div class="res-modal-head">
+      <div>
+        <div class="res-modal-title">Free AI Automation Toolkit</div>
+        <div class="res-modal-sub">Fill in your details to access all resources instantly</div>
+      </div>
+      <button class="res-close" onclick="closeResources()">×</button>
+    </div>
+    <div class="res-modal-body">
+      <p class="res-loading" id="resLoading">Loading form…</p>
+      <iframe id="resFrame" frameborder="0" marginheight="0" marginwidth="0" style="display:none"></iframe>
+    </div>
+  </div>
+</div>
+
 <script>
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 document.querySelectorAll('.service-row,.step-card,.proj-card,.reason').forEach((el,i)=>{el.style.transitionDelay=`${i*0.07}s`});
+
+function openResources(){
+  const overlay=document.getElementById('resOverlay');
+  const frame=document.getElementById('resFrame');
+  const loading=document.getElementById('resLoading');
+  overlay.classList.add('active');
+  document.body.style.overflow='hidden';
+  frame.style.display='none';
+  loading.style.display='block';
+  let loads=0;
+  frame.onload=function(){
+    loading.style.display='none';
+    frame.style.display='block';
+    loads++;
+    if(loads>=2){
+      setTimeout(()=>{closeResources();window.location.href='resources.html';},1000);
+    }
+  };
+  frame.src='https://docs.google.com/forms/d/e/1FAIpQLSfVlCw3bENqIr1U52hBE1isaMAkN1-NN_VVFAEvKmL9OPuNFQ/viewform?embedded=true';
+}
+
+function closeResources(){
+  document.getElementById('resOverlay').classList.remove('active');
+  document.body.style.overflow='';
+  const frame=document.getElementById('resFrame');
+  frame.src='';
+  frame.style.display='none';
+  document.getElementById('resLoading').style.display='block';
+}
+
+document.getElementById('resOverlay').addEventListener('click',function(e){
+  if(e.target===this)closeResources();
+});
 </script>
 </body>
 </html>
