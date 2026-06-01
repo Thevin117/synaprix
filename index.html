@@ -37,6 +37,15 @@ nav{
 .nav-links a:hover{color:var(--ink)}
 .nav-cta{background:var(--ink)!important;color:var(--white)!important;padding:0.5rem 1.25rem;border-radius:100px;font-size:0.85rem!important;font-weight:500!important;transition:opacity 0.2s!important}
 .nav-cta:hover{opacity:0.8!important}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all 0.25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:57px;left:0;right:0;background:rgba(250,250,248,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);z-index:99;flex-direction:column;padding:0.5rem 0 1rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--ink3);text-decoration:none;font-size:0.95rem;font-weight:400;padding:0.85rem 5%;border-bottom:1px solid var(--line);transition:color 0.2s}
+.mobile-menu a:hover{color:var(--ink)}
 
 #hero{
   min-height:100vh;
@@ -159,7 +168,8 @@ footer{background:var(--ink);padding:1.5rem 5%;display:flex;align-items:center;j
 
 @media(max-width:600px){
   nav{padding:1rem 5%}
-  .nav-links li:not(:last-child){display:none}
+  .nav-links{display:none}
+  .hamburger{display:flex}
   section{padding:4.5rem 5%}
   #hero{padding:6rem 5% 3.5rem;min-height:auto}
   h1{font-size:2.6rem;letter-spacing:-1px}
@@ -196,7 +206,17 @@ footer{background:var(--ink);padding:1.5rem 5%;display:flex;align-items:center;j
     <li><a href="#" onclick="openResources();return false;">Resources</a></li>
     <li><a href="https://wa.link/fs83cb" target="_blank" class="nav-cta">Let's Talk</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#process" onclick="closeMobileMenu()">Process</a>
+  <a href="#projects" onclick="closeMobileMenu()">Work</a>
+  <a href="#" onclick="closeMobileMenu();openResources();return false;">Resources</a>
+  <a href="https://wa.link/fs83cb" target="_blank" style="color:var(--accent);font-weight:500;border-bottom:none">Let's Talk</a>
+</div>
 
 <section id="hero">
   <div class="hero-left">
@@ -463,6 +483,17 @@ function closeResources(){
 document.getElementById('resOverlay').addEventListener('click',function(e){
   if(e.target===this)closeResources();
 });
+
+function toggleMobileMenu(){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
 </script>
 </body>
 </html>
